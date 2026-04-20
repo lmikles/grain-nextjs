@@ -136,23 +136,7 @@ export default function EventsPage() {
           {programs.map((p) => (
             <div
               key={p.name}
-              style={{
-                background: 'var(--cream)',
-                borderRadius: '12px',
-                padding: '32px 28px',
-                borderBottom: '3px solid transparent',
-                transition: 'border-color .3s, transform .25s',
-              }}
-              onMouseEnter={(e) => {
-                const el = e.currentTarget as HTMLElement
-                el.style.borderBottomColor = 'var(--amber)'
-                el.style.transform = 'translateY(-4px)'
-              }}
-              onMouseLeave={(e) => {
-                const el = e.currentTarget as HTMLElement
-                el.style.borderBottomColor = 'transparent'
-                el.style.transform = 'translateY(0)'
-              }}
+              className="program-card"
             >
               <div style={{ fontSize: '28px', marginBottom: '12px' }}>{p.icon}</div>
               <h3
@@ -174,6 +158,17 @@ export default function EventsPage() {
         </div>
 
         <style>{`
+          .program-card {
+            background: var(--cream);
+            border-radius: 12px;
+            padding: 32px 28px;
+            border-bottom: 3px solid transparent;
+            transition: border-color .3s, transform .25s;
+          }
+          .program-card:hover {
+            border-bottom-color: var(--amber);
+            transform: translateY(-4px);
+          }
           @media (max-width: 900px) {
             .programs-grid { grid-template-columns: 1fr 1fr !important; }
           }

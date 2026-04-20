@@ -172,26 +172,7 @@ export default async function HomePage() {
             ].map((stat, i) => (
               <div
                 key={stat.label}
-                style={{
-                  background: i % 2 === 0 ? 'var(--cream)' : '#fff8ee',
-                  borderRadius: '10px',
-                  padding: '30px 24px',
-                  borderBottom: '3px solid transparent',
-                  transition: 'border-color .3s, transform .25s, box-shadow .25s',
-                  cursor: 'default',
-                }}
-                onMouseEnter={(e) => {
-                  const el = e.currentTarget as HTMLElement
-                  el.style.borderBottomColor = 'var(--amber)'
-                  el.style.transform = 'translateY(-4px)'
-                  el.style.boxShadow = '0 12px 36px rgba(212,114,14,.12)'
-                }}
-                onMouseLeave={(e) => {
-                  const el = e.currentTarget as HTMLElement
-                  el.style.borderBottomColor = 'transparent'
-                  el.style.transform = 'translateY(0)'
-                  el.style.boxShadow = 'none'
-                }}
+                className={`stat-card stat-card-${i % 2 === 0 ? 'even' : 'odd'}`}
               >
                 <div
                   style={{
@@ -223,6 +204,20 @@ export default async function HomePage() {
         <style>{`
           @media (max-width: 900px) {
             .brand-inner-grid { grid-template-columns: 1fr !important; }
+          }
+          .stat-card {
+            border-radius: 10px;
+            padding: 30px 24px;
+            border-bottom: 3px solid transparent;
+            transition: border-color .3s, transform .25s, box-shadow .25s;
+            cursor: default;
+          }
+          .stat-card-even { background: var(--cream); }
+          .stat-card-odd { background: #fff8ee; }
+          .stat-card:hover {
+            border-bottom-color: var(--amber);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 36px rgba(212,114,14,.12);
           }
         `}</style>
       </section>
@@ -344,21 +339,7 @@ export default async function HomePage() {
               ].map((item) => (
                 <div
                   key={item.name}
-                  style={{
-                    background: 'rgba(255,255,255,.05)',
-                    borderRadius: '8px',
-                    padding: '16px',
-                    borderLeft: '3px solid var(--amber)',
-                    transition: 'background .25s',
-                  }}
-                  onMouseEnter={(e) =>
-                    ((e.currentTarget as HTMLElement).style.background =
-                      'rgba(255,255,255,.08)')
-                  }
-                  onMouseLeave={(e) =>
-                    ((e.currentTarget as HTMLElement).style.background =
-                      'rgba(255,255,255,.05)')
-                  }
+                  className="food-item-card"
                 >
                   <div
                     style={{
@@ -402,14 +383,9 @@ export default async function HomePage() {
                 src="/images/food-crab-nachos.jpg"
                 alt="Crab Nachos"
                 fill
-                style={{ objectFit: 'cover', transition: 'transform .5s ease' }}
+                className="food-hero-img"
+                style={{ objectFit: 'cover' }}
                 sizes="(max-width: 768px) 100vw, 25vw"
-                onMouseEnter={(e) =>
-                  ((e.currentTarget as HTMLElement).style.transform = 'scale(1.06)')
-                }
-                onMouseLeave={(e) =>
-                  ((e.currentTarget as HTMLElement).style.transform = 'scale(1)')
-                }
               />
               <div
                 style={{
@@ -507,6 +483,18 @@ export default async function HomePage() {
           @media (max-width: 900px) {
             .food-inner-grid { grid-template-columns: 1fr !important; }
           }
+          .food-item-card {
+            background: rgba(255,255,255,.05);
+            border-radius: 8px;
+            padding: 16px;
+            border-left: 3px solid var(--amber);
+            transition: background .25s;
+          }
+          .food-item-card:hover { background: rgba(255,255,255,.08); }
+          .food-hero-img {
+            transition: transform .5s ease;
+          }
+          .food-hero-img:hover { transform: scale(1.06); }
         `}</style>
       </section>
 

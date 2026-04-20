@@ -116,23 +116,7 @@ export default function CareersPage() {
           {perks.map((perk) => (
             <div
               key={perk.title}
-              style={{
-                background: 'var(--cream)',
-                borderRadius: '10px',
-                padding: '28px',
-                borderBottom: '3px solid transparent',
-                transition: 'border-color .3s, transform .25s',
-              }}
-              onMouseEnter={(e) => {
-                const el = e.currentTarget as HTMLElement
-                el.style.borderBottomColor = 'var(--amber)'
-                el.style.transform = 'translateY(-4px)'
-              }}
-              onMouseLeave={(e) => {
-                const el = e.currentTarget as HTMLElement
-                el.style.borderBottomColor = 'transparent'
-                el.style.transform = 'translateY(0)'
-              }}
+              className="perk-card"
             >
               <div style={{ fontSize: '28px', marginBottom: '10px' }}>{perk.icon}</div>
               <h3
@@ -153,6 +137,17 @@ export default function CareersPage() {
           ))}
         </div>
         <style>{`
+          .perk-card {
+            background: var(--cream);
+            border-radius: 10px;
+            padding: 28px;
+            border-bottom: 3px solid transparent;
+            transition: border-color .3s, transform .25s;
+          }
+          .perk-card:hover {
+            border-bottom-color: var(--amber);
+            transform: translateY(-4px);
+          }
           @media (max-width: 900px) {
             .perks-grid { grid-template-columns: 1fr 1fr !important; }
           }
