@@ -118,7 +118,7 @@ export default function PlayAtGrainForm() {
           <select name="location" value={formData.location} onChange={handleChange} style={{ ...inputStyle }}>
             <option value="">Any Location</option>
             <option value="Newark">Newark — Main St</option>
-            <option value="H2O">Grain H2O — Bear</option>
+            <option value="H2O">Grain H2O — C&D Canal</option>
             <option value="Exchange">Grain Exchange</option>
           </select>
         </div>

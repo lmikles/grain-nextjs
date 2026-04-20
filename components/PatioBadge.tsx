@@ -1,7 +1,9 @@
-import { WeatherData, isGoodPatioWeather, formatTemp } from '@/lib/weather'
+import { WeatherData } from '@/lib/events'
 
 export default function PatioBadge({ weather }: { weather: WeatherData | null }) {
-  if (!isGoodPatioWeather(weather)) return null
+  if (!weather?.showPatioBadge || !weather.day) return null
+
+  const temp = weather.details?.tempF ? `${Math.round(weather.details.tempF)}°F · ` : ''
 
   return (
     <div
@@ -20,9 +22,7 @@ export default function PatioBadge({ weather }: { weather: WeatherData | null })
       }}
     >
       <span>☀️</span>
-      <span>
-        {weather?.temp !== undefined ? formatTemp(weather.temp) : ''} — Patio weather today
-      </span>
+      <span>{temp}{weather.message}</span>
     </div>
   )
 }

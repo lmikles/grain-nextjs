@@ -27,11 +27,18 @@ export async function fetchEvents(location?: string): Promise<GrainEvent[]> {
   }
 }
 
-export async function fetchWeather(): Promise<{
-  temp?: number
-  condition?: string
-  isNiceOut?: boolean
-} | null> {
+export interface WeatherData {
+  showPatioBadge: boolean
+  day: string | null
+  message: string
+  details?: {
+    tempF: number
+    precipProbability: number
+    windMph: number
+  }
+}
+
+export async function fetchWeather(): Promise<WeatherData | null> {
   try {
     const res = await fetch(`${WORKER_URL}/weather`, { next: { revalidate: 1800 } })
     if (!res.ok) return null

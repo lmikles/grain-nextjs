@@ -4,7 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import ThisWeekCard from './ThisWeekCard'
 import PatioBadge from './PatioBadge'
-import { WeatherData } from '@/lib/weather'
+import { WeatherData } from '@/lib/events'
 import { GrainEvent } from '@/lib/events'
 
 interface HeroSectionProps {

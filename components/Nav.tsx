@@ -66,6 +66,7 @@ export default function Nav() {
           { label: "What's On", href: '/whats-happening' },
           { label: 'Events', href: '/events' },
           { label: 'Our Story', href: '/our-story' },
+          { label: 'Order Online', href: '/order' },
         ].map((link) => (
           <li key={link.href}>
             <Link
