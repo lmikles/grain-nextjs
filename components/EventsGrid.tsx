@@ -17,27 +17,27 @@ const chipColors: Record<EventType, { bg: string; color: string }> = {
 const fallbackEvents: GrainEvent[] = [
   {
     id: 'f1', title: 'Live Music: Chris Giakas', date: 'Saturday · Mar 14 · Newark · 7pm',
-    location: '270 East Main Street · Free outdoor patio', eventType: 'music', featured: true, freeAdmission: true,
+    location: '270 East Main Street · Free outdoor patio', type: 'music', featured: true, freeAdmission: true,
   },
   {
     id: 'f2', title: 'All You Can Eat Wings', date: 'Mon · Every Week · 4pm',
-    location: 'Grain Exchange', eventType: 'wings',
+    location: 'Grain Exchange', type: 'wings',
   },
   {
     id: 'f3', title: 'Grain Bingo w/ Rylie', date: 'Mon · Every Week · 6pm',
-    location: 'Newark', eventType: 'bingo',
+    location: 'Newark', type: 'bingo',
   },
   {
     id: 'f4', title: 'Trivia Night', date: 'Tue · Every Week · 6pm',
-    location: 'Newark & Exchange', eventType: 'trivia',
+    location: 'Newark & Exchange', type: 'trivia',
   },
   {
     id: 'f5', title: 'Weekend Wind Down', date: 'Thu · Every Week · 5pm',
-    location: 'Grain Exchange · Free live music', eventType: 'music',
+    location: 'Grain Exchange · Free live music', type: 'music',
   },
   {
     id: 'f6', title: 'Sunday Funday Brunch', date: 'Sun · Every Week · 10am',
-    location: 'Grain H2O', eventType: 'brunch',
+    location: 'Grain H2O', type: 'brunch',
   },
 ]
 
@@ -162,7 +162,7 @@ export default function EventsGrid({ events }: EventsGridProps) {
       >
         {displayEvents.map((event, i) => {
           const isFeatured = event.featured || i === 0
-          const typeKey = (event.eventType?.toLowerCase() as EventType) || 'special'
+          const typeKey = (event.type?.toLowerCase() as EventType) || 'special'
           const chip = chipColors[typeKey] || chipColors.special
           const dateStr = event.date
             ? event.date
@@ -265,7 +265,7 @@ export default function EventsGrid({ events }: EventsGridProps) {
                   color: chip.color,
                 }}
               >
-                {event.eventType || 'Event'}
+                {event.type || 'Event'}
               </span>
               {(event.freeAdmission || isFeatured) && (
                 <div

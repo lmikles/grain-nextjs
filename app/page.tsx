@@ -499,7 +499,7 @@ export default async function HomePage() {
       </section>
 
       {/* 5. Locations */}
-      <LocationsSection locations={locations} />
+      <LocationsSection locations={locations} events={events} />
 
       {/* 6. Events Grid */}
       <EventsGrid events={events} />

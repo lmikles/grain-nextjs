@@ -230,7 +230,7 @@ export default async function WhatsHappeningPage() {
                     </div>
                   )}
                 </div>
-                {event.eventType && (
+                {event.type && (
                   <span style={{
                     fontSize: '10px',
                     fontWeight: 800,
@@ -241,7 +241,7 @@ export default async function WhatsHappeningPage() {
                     background: 'rgba(212,114,14,.2)',
                     color: 'var(--orange)',
                   }}>
-                    {event.eventType}
+                    {event.type}
                   </span>
                 )}
                 <span style={{ fontSize: '11px', color: 'rgba(255,255,255,.3)', fontWeight: 600 }}>

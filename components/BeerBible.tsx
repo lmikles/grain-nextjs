@@ -1,19 +1,103 @@
 'use client'
 
-import Link from 'next/link'
+import { useState } from 'react'
 
-const beers = [
-  { left: 24, top: 28, name: 'Mango Cart', tipName: 'Golden Road Mango Cart', tipDesc: '4% · $8 · Light, tropical' },
-  { left: 50, top: 22, name: 'Allagash White', tipName: 'Allagash White', tipDesc: '5.2% · $7.50 · Belgian wheat' },
-  { left: 75, top: 24, name: 'Juicy Haze', tipName: 'Voodoo Ranger Juicy Haze', tipDesc: '7.5% · $8.50 · Tropical IPA' },
-  { left: 42, top: 42, name: 'Blue Hen Pilsner', tipName: 'Dogfish Blue Hen Pilsner', tipDesc: "4.8% · $6 · Delaware's own" },
-  { left: 50, top: 53, name: 'Yuengling', tipName: 'Yuengling Lager', tipDesc: '4.5% · $5 · Classic lager' },
-  { left: 28, top: 74, name: 'Guinness', tipName: 'Guinness Draught', tipDesc: '4.2% · $7 · Dry Irish stout' },
-  { left: 76, top: 57, name: '60 Min IPA', tipName: 'Dogfish Head 60 Minute', tipDesc: '6% · $7 · Balanced IPA' },
-  { left: 87, top: 71, name: '90 Min IPA', tipName: 'Dogfish Head 90 Minute', tipDesc: '9% · $9 · Imperial IPA' },
+const styles = [
+  {
+    id: 'lager',
+    label: 'Lager',
+    left: 52,
+    top: 68,
+    color: '#e8b820',
+    emoji: '🍺',
+    abv: '3.5–5%',
+    tags: ['Crisp', 'Clean', 'Refreshing'],
+    love: 'You want something cold and effortless',
+  },
+  {
+    id: 'wheat',
+    label: 'Wheat & Wit',
+    left: 28,
+    top: 30,
+    color: '#f0a830',
+    emoji: '🌾',
+    abv: '4.5–5.5%',
+    tags: ['Hazy', 'Citrus', 'Soft'],
+    love: 'You liked Blue Moon or Allagash',
+  },
+  {
+    id: 'pale',
+    label: 'Pale Ale',
+    left: 64,
+    top: 46,
+    color: '#d4720e',
+    emoji: '🍊',
+    abv: '4.5–5.5%',
+    tags: ['Balanced', 'Hoppy', 'Easy'],
+    love: 'You want something a step above a lager',
+  },
+  {
+    id: 'neipa',
+    label: 'New England IPA',
+    left: 77,
+    top: 18,
+    color: '#e8a020',
+    emoji: '🍍',
+    abv: '6–8%',
+    tags: ['Tropical', 'Juicy', 'Hazy'],
+    love: 'You want big flavor without sharp bitterness',
+  },
+  {
+    id: 'wcipa',
+    label: 'West Coast IPA',
+    left: 88,
+    top: 36,
+    color: '#c75a08',
+    emoji: '🌲',
+    abv: '6–7.5%',
+    tags: ['Piney', 'Citrus', 'Dry'],
+    love: 'You like a clean, pronounced bitter finish',
+  },
+  {
+    id: 'amber',
+    label: 'Amber / Märzen',
+    left: 26,
+    top: 56,
+    color: '#a04010',
+    emoji: '🍂',
+    abv: '4.8–5.5%',
+    tags: ['Toasty', 'Caramel', 'Malt-forward'],
+    love: 'You want something warm and familiar',
+  },
+  {
+    id: 'sour',
+    label: 'Sour / Gose',
+    left: 50,
+    top: 10,
+    color: '#6aaa30',
+    emoji: '🍋',
+    abv: '3.5–5%',
+    tags: ['Tart', 'Fruity', 'Bright'],
+    love: 'You like kombucha or dry rosé',
+  },
+  {
+    id: 'porter',
+    label: 'Porter & Stout',
+    left: 18,
+    top: 82,
+    color: '#2a1810',
+    emoji: '☕',
+    abv: '4.2–9%',
+    tags: ['Roasty', 'Chocolate', 'Dark'],
+    love: 'You like coffee or dark chocolate',
+  },
 ]
 
 export default function BeerBible() {
+  const [active, setActive] = useState<number | null>(null)
+
+  const activeBeer = active !== null ? styles[active] : null
+
   return (
     <section
       style={{
@@ -30,7 +114,7 @@ export default function BeerBible() {
         }}
         className="bb-inner-grid"
       >
-        {/* Left: text */}
+        {/* Left: text + active beer card */}
         <div>
           <div
             style={{
@@ -45,9 +129,7 @@ export default function BeerBible() {
               gap: '10px',
             }}
           >
-            <span
-              style={{ display: 'block', width: '24px', height: '2px', background: 'var(--amber)' }}
-            />
+            <span style={{ display: 'block', width: '24px', height: '2px', background: 'var(--amber)' }} />
             The Beer Bible
           </div>
           <h2
@@ -60,12 +142,10 @@ export default function BeerBible() {
               marginBottom: '18px',
             }}
           >
-            Find a beer you know.
+            Find a style you like.
             <br />
-            <em
-              style={{ fontStyle: 'italic', color: 'var(--amber)', fontWeight: 300 }}
-            >
-              Start exploring from there.
+            <em style={{ fontStyle: 'italic', color: 'var(--amber)', fontWeight: 300 }}>
+              We&apos;ll pour you something perfect.
             </em>
           </h2>
           <p
@@ -74,64 +154,150 @@ export default function BeerBible() {
               fontWeight: 400,
               lineHeight: 1.8,
               color: 'var(--text-mid)',
-              marginBottom: '36px',
+              marginBottom: '32px',
             }}
           >
-            We mapped our entire tap list by flavor so you can find something new without
-            gambling on a pint you won&apos;t finish. Hover a dot. Not sure? Ask for a taster
-            — once it&apos;s poured, it&apos;s yours.
+            Hover a dot to explore beer styles by flavor. Our tap list rotates constantly —
+            tell your bartender what sounds good and they&apos;ll find you something cold
+            and exactly right. Tasters are always free to ask for.
           </p>
-          <Link
-            href="/menus"
+
+          {/* Active beer detail card */}
+          <div
             style={{
-              display: 'inline-block',
-              padding: '16px 36px',
-              background: 'var(--amber)',
-              color: '#fff',
-              fontFamily: 'var(--font-nunito), sans-serif',
-              fontSize: '14px',
-              fontWeight: 800,
-              letterSpacing: '0.04em',
-              textDecoration: 'none',
-              borderRadius: '4px',
-              transition: 'background .25s, transform .2s, box-shadow .25s',
-              boxShadow: '0 4px 20px rgba(212,114,14,.35)',
-            }}
-            onMouseEnter={(e) => {
-              const el = e.currentTarget as HTMLElement
-              el.style.background = 'var(--amber-bright)'
-              el.style.transform = 'translateY(-3px)'
-            }}
-            onMouseLeave={(e) => {
-              const el = e.currentTarget as HTMLElement
-              el.style.background = 'var(--amber)'
-              el.style.transform = 'translateY(0)'
+              minHeight: '140px',
+              borderRadius: '12px',
+              padding: '24px',
+              background: activeBeer ? '#fff' : 'rgba(30,20,10,.04)',
+              border: activeBeer ? '1.5px solid rgba(212,114,14,.2)' : '1.5px dashed rgba(30,20,10,.12)',
+              transition: 'background .3s, border-color .3s',
             }}
           >
-            See the Full Beer Bible
-          </Link>
+            {activeBeer ? (
+              <div style={{ animation: 'bbFadeIn .2s ease' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '14px' }}>
+                  <span style={{ fontSize: '28px' }}>{activeBeer.emoji}</span>
+                  <div>
+                    <div
+                      style={{
+                        fontFamily: 'var(--font-fraunces), serif',
+                        fontSize: '22px',
+                        fontWeight: 700,
+                        color: 'var(--night)',
+                        lineHeight: 1.1,
+                      }}
+                    >
+                      {activeBeer.label}
+                    </div>
+                    <div
+                      style={{
+                        fontSize: '12px',
+                        fontWeight: 700,
+                        color: 'var(--amber)',
+                        letterSpacing: '0.05em',
+                        marginTop: '2px',
+                      }}
+                    >
+                      Typically {activeBeer.abv} ABV
+                    </div>
+                  </div>
+                </div>
+                <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', marginBottom: '14px' }}>
+                  {activeBeer.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      style={{
+                        fontSize: '11px',
+                        fontWeight: 700,
+                        padding: '4px 10px',
+                        borderRadius: '20px',
+                        background: 'rgba(212,114,14,.1)',
+                        color: 'var(--amber)',
+                      }}
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <p
+                  style={{
+                    fontSize: '14px',
+                    fontStyle: 'italic',
+                    color: 'var(--text-soft)',
+                    borderLeft: '3px solid var(--amber)',
+                    paddingLeft: '12px',
+                    lineHeight: 1.5,
+                  }}
+                >
+                  {activeBeer.love}
+                </p>
+              </div>
+            ) : (
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  height: '100%',
+                  color: 'var(--text-soft)',
+                  textAlign: 'center',
+                  gap: '8px',
+                  padding: '16px 0',
+                }}
+              >
+                <span style={{ fontSize: '24px', opacity: 0.4 }}>👈</span>
+                <span style={{ fontSize: '13px', fontWeight: 600, opacity: 0.5 }}>
+                  Hover a dot to explore beer styles
+                </span>
+              </div>
+            )}
+          </div>
         </div>
 
-        {/* Right: chart */}
+        {/* Right: flavor chart */}
         <div className="bb-chart">
           <div className="bb-area" />
           <div className="bb-axis-h" />
           <div className="bb-axis-v" />
           <div className="bb-label top">Fruitier</div>
           <div className="bb-label bottom">Maltier</div>
-          <div className="bb-label left">Sweeter</div>
-          <div className="bb-label right">Bitter</div>
-          {beers.map((beer) => (
+          <div className="bb-label left">Lighter</div>
+          <div className="bb-label right">Bolder</div>
+
+          {styles.map((beer, i) => (
             <div
-              key={beer.name}
+              key={beer.id}
               className="bb-dot"
               style={{ left: `${beer.left}%`, top: `${beer.top}%` }}
+              onMouseEnter={() => setActive(i)}
+              onMouseLeave={() => setActive(null)}
             >
-              <div className="bb-dot-circle" />
-              <div className="bb-dot-name">{beer.name}</div>
-              <div className="bb-tooltip">
-                <div className="bb-tooltip-name">{beer.tipName}</div>
-                <div className="bb-tooltip-desc">{beer.tipDesc}</div>
+              {/* Pulse ring */}
+              <div
+                className={active === i ? 'bb-pulse bb-pulse-active' : 'bb-pulse'}
+                style={{ borderColor: beer.color }}
+              />
+              {/* Dot */}
+              <div
+                className="bb-dot-circle"
+                style={{
+                  background: beer.color,
+                  transform: active === i ? 'scale(1.5)' : 'scale(1)',
+                  boxShadow: active === i ? `0 0 0 4px ${beer.color}33` : 'none',
+                }}
+              />
+              {/* Label */}
+              <div
+                className="bb-dot-name"
+                style={{
+                  opacity: active === i ? 1 : 0.55,
+                  fontWeight: active === i ? 800 : 600,
+                  transform: active === i ? 'translateY(2px)' : 'none',
+                  color: active === i ? 'var(--night)' : undefined,
+                }}
+              >
+                {beer.label}
               </div>
             </div>
           ))}
@@ -139,6 +305,35 @@ export default function BeerBible() {
       </div>
 
       <style>{`
+        @keyframes bbFadeIn {
+          from { opacity: 0; transform: translateY(6px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes bbPulse {
+          0%   { transform: translate(-50%, -50%) scale(1);   opacity: .6; }
+          100% { transform: translate(-50%, -50%) scale(2.6); opacity: 0; }
+        }
+        .bb-pulse {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 14px;
+          height: 14px;
+          border-radius: 50%;
+          border: 2px solid;
+          opacity: 0;
+          pointer-events: none;
+        }
+        .bb-pulse-active {
+          animation: bbPulse .8s ease-out infinite;
+        }
+        .bb-dot-circle {
+          transition: transform .25s, box-shadow .25s;
+        }
+        .bb-dot-name {
+          transition: opacity .2s, font-weight .2s;
+        }
         @media (max-width: 900px) {
           .bb-inner-grid { grid-template-columns: 1fr !important; }
           .bb-chart { max-width: 320px !important; margin-top: 40px; }

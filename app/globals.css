@@ -155,64 +155,22 @@ body {
 }
 
 .bb-dot-circle {
-  width: 11px;
-  height: 11px;
+  width: 13px;
+  height: 13px;
   border-radius: 50%;
-  background: var(--amber);
-  margin: 0 auto 4px;
-  border: 2px solid #fff;
-  box-shadow: 0 2px 10px rgba(212, 114, 14, 0.4);
-  transition: transform 0.25s, background 0.25s;
-}
-
-.bb-dot:hover .bb-dot-circle {
-  transform: scale(2.4);
-  background: var(--orange);
+  margin: 0 auto 5px;
+  border: 2px solid rgba(255,255,255,.8);
+  box-shadow: 0 2px 10px rgba(0,0,0,.2);
+  position: relative;
+  z-index: 1;
 }
 
 .bb-dot-name {
   font-size: 8px;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--text-soft);
   white-space: nowrap;
-  transition: color 0.2s;
-}
-
-.bb-dot:hover .bb-dot-name {
-  color: var(--amber);
-}
-
-.bb-tooltip {
-  position: absolute;
-  bottom: calc(100% + 10px);
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--night);
-  padding: 10px 14px;
-  min-width: 150px;
-  border-radius: 6px;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.2s;
-  z-index: 10;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
-}
-
-.bb-dot:hover .bb-tooltip {
-  opacity: 1;
-}
-
-.bb-tooltip-name {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--orange);
-  margin-bottom: 3px;
-}
-
-.bb-tooltip-desc {
-  font-size: 10px;
-  color: rgba(255, 255, 255, 0.5);
-  line-height: 1.5;
+  letter-spacing: 0.01em;
 }
 
 /* Quote break pseudo element */

@@ -16,11 +16,11 @@ const typeColors: Record<EventType, { bg: string; color: string }> = {
 }
 
 const fallbackEvents: GrainEvent[] = [
-  { id: '1', title: 'Grain Bingo w/ Rylie', time: '6pm', location: 'Newark', eventType: 'bingo', date: 'Mon' },
-  { id: '2', title: 'All You Can Eat Wings', time: '4pm', location: 'Exchange', eventType: 'wings', date: 'Mon' },
-  { id: '3', title: 'Trivia Night', time: '6pm', location: 'Newark', eventType: 'trivia', date: 'Tue' },
-  { id: '4', title: 'Weekend Wind Down', time: '5pm', location: 'Exchange', eventType: 'music', date: 'Thu' },
-  { id: '5', title: 'Live Music', time: '7pm', location: 'Newark', eventType: 'music', date: 'Sat' },
+  { id: '1', title: 'Grain Bingo w/ Rylie', time: '6pm', location: 'Newark', type: 'bingo', date: 'Mon' },
+  { id: '2', title: 'All You Can Eat Wings', time: '4pm', location: 'Exchange', type: 'wings', date: 'Mon' },
+  { id: '3', title: 'Trivia Night', time: '6pm', location: 'Newark', type: 'trivia', date: 'Tue' },
+  { id: '4', title: 'Weekend Wind Down', time: '5pm', location: 'Exchange', type: 'music', date: 'Thu' },
+  { id: '5', title: 'Live Music', time: '7pm', location: 'Newark', type: 'music', date: 'Sat' },
 ]
 
 interface ThisWeekCardProps {
@@ -121,7 +121,7 @@ export default function ThisWeekCard({ events: initialEvents }: ThisWeekCardProp
         </>
       ) : (
         displayEvents.map((event) => {
-          const typeKey = (event.eventType?.toLowerCase() as EventType) || 'special'
+          const typeKey = (event.type?.toLowerCase() as EventType) || 'special'
           const colors = typeColors[typeKey] || typeColors.special
 
           return (
@@ -182,7 +182,7 @@ export default function ThisWeekCard({ events: initialEvents }: ThisWeekCardProp
                   color: colors.color,
                 }}
               >
-                {event.eventType || 'Event'}
+                {event.type || 'Event'}
               </span>
             </div>
           )

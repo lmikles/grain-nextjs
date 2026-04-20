@@ -3,11 +3,28 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { Location } from '@/lib/sanity'
+import { GrainEvent } from '@/lib/events'
 
 const locationImages: Record<string, string> = {
   newark: '/images/location-newark-hero.jpg',
   h2o: '/images/location-h2o-hero.jpg',
   exchange: '/images/hero-exchange-1.jpeg',
+}
+
+// Photo gallery images per location
+// Drop photos into /public/images/locations/[slug]/photo-1.jpg, photo-2.jpg, etc.
+const galleryImages: Record<string, string[]> = {
+  newark: [
+    '/images/location-newark.jpg',
+    '/images/community-event-1.jpg',
+  ],
+  h2o: [
+    '/images/location-h2o.jpg',
+  ],
+  exchange: [
+    '/images/location-exchange.jpg',
+    '/images/location-exchange-hero.jpg',
+  ],
 }
 
 const locationStyles: Record<string, { bg: string }> = {
@@ -28,15 +45,33 @@ const locationStyles: Record<string, { bg: string }> = {
   },
 }
 
+const EVENT_ICONS: Record<string, string> = {
+  music: '🎵',
+  special: '⭐',
+  games: '🎯',
+  general: '📅',
+  static: '🕐',
+}
+
+function formatEventDate(dateStr?: string): string {
+  if (!dateStr) return ''
+  try {
+    const d = new Date(dateStr + 'T12:00:00')
+    return d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })
+  } catch {
+    return dateStr
+  }
+}
+
 const fallbackLocations: Location[] = [
   {
     _id: 'newark',
-    name: 'Newark',
+    name: 'Grain on Main',
     slug: { current: 'newark' },
     tagline: 'The original. Est. 2015.',
     addressLine1: '270 East Main Street',
     addressLine2: 'Newark, DE',
-    descriptionShort: 'The flagship. Main Street energy, a fire pit patio that keeps going after sundown, and live music every Saturday.',
+    descriptionShort: 'The flagship. Main Street energy, a fire pit patio, and live music every Saturday.',
     features: ['Fire Pit Patio', 'Live Music Sat', 'Dog Friendly', 'Free Parking'],
     badgeLabel: 'Est. 2015 · The Original',
     accentColor: '#d4720e',
@@ -57,7 +92,7 @@ const fallbackLocations: Location[] = [
     _id: 'exchange',
     name: 'Grain Exchange',
     slug: { current: 'exchange' },
-    tagline: "Middletown's craft bar.",
+    tagline: "Newark's craft bar.",
     addressLine1: 'STAR Campus',
     addressLine2: 'Newark, DE',
     descriptionShort: "Newark's first outdoor patio in 30 years. Big city energy, a great lawn, and UD Athletics right across the street.",
@@ -69,9 +104,10 @@ const fallbackLocations: Location[] = [
 
 interface LocationsSectionProps {
   locations: Location[]
+  events?: GrainEvent[]
 }
 
-export default function LocationsSection({ locations }: LocationsSectionProps) {
+export default function LocationsSection({ locations, events = [] }: LocationsSectionProps) {
   const displayLocations = locations.length > 0 ? locations : fallbackLocations
 
   return (
@@ -137,7 +173,7 @@ export default function LocationsSection({ locations }: LocationsSectionProps) {
         style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(3, 1fr)',
-          gap: '20px',
+          gap: '24px',
         }}
         className="loc-cards-grid"
       >
@@ -145,120 +181,150 @@ export default function LocationsSection({ locations }: LocationsSectionProps) {
           const slug = loc.slug?.current || loc._id
           const imgSrc = locationImages[slug]
           const style = locationStyles[slug]
+          const photos = galleryImages[slug] || []
+
+          // Events for this location — next 3
+          const locEvents = events
+            .filter((e) => e.location === slug)
+            .slice(0, 3)
 
           return (
-            <Link
+            <div
               key={loc._id}
-              href={`/locations/${slug}`}
               style={{
-                background: 'var(--cream)',
-                borderRadius: '12px',
+                background: '#fff',
+                borderRadius: '14px',
                 overflow: 'hidden',
-                textDecoration: 'none',
-                display: 'block',
-                transition: 'transform .35s, box-shadow .35s',
+                display: 'flex',
+                flexDirection: 'column',
+                boxShadow: '0 2px 16px rgba(30,20,10,.07)',
+                transition: 'transform .3s, box-shadow .3s',
               }}
-              onMouseEnter={(e) => {
-                const el = e.currentTarget as HTMLElement
-                el.style.transform = 'translateY(-8px)'
-                el.style.boxShadow = '0 20px 52px rgba(30,20,10,.15)'
-              }}
-              onMouseLeave={(e) => {
-                const el = e.currentTarget as HTMLElement
-                el.style.transform = 'translateY(0)'
-                el.style.boxShadow = 'none'
-              }}
+              className="loc-card"
             >
-              {/* Card top image */}
-              <div
-                style={{
-                  height: '220px',
-                  position: 'relative',
-                  overflow: 'hidden',
-                }}
-              >
-                {imgSrc ? (
-                  <Image
-                    src={imgSrc}
-                    alt={loc.name}
-                    fill
-                    style={{ objectFit: 'cover' }}
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                  />
-                ) : (
+              {/* Hero image */}
+              <Link href={`/locations/${slug}`} style={{ textDecoration: 'none', display: 'block' }}>
+                <div
+                  style={{
+                    height: '220px',
+                    position: 'relative',
+                    overflow: 'hidden',
+                  }}
+                >
+                  {imgSrc ? (
+                    <Image
+                      src={imgSrc}
+                      alt={loc.name}
+                      fill
+                      style={{ objectFit: 'cover', transition: 'transform .5s ease' }}
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      className="loc-hero-img"
+                    />
+                  ) : (
+                    <div
+                      style={{
+                        position: 'absolute',
+                        inset: 0,
+                        background: style?.bg || 'var(--night)',
+                      }}
+                    />
+                  )}
                   <div
                     style={{
                       position: 'absolute',
                       inset: 0,
-                      background: style?.bg || 'var(--night)',
+                      background: 'linear-gradient(to bottom, rgba(0,0,0,.08) 0%, rgba(0,0,0,.5) 100%)',
                     }}
                   />
-                )}
-                <div
-                  style={{
-                    position: 'absolute',
-                    inset: 0,
-                    background:
-                      'linear-gradient(to bottom, rgba(0,0,0,.1) 0%, rgba(0,0,0,.45) 100%)',
-                  }}
-                />
-                {loc.badgeLabel && (
+                  {loc.badgeLabel && (
+                    <div
+                      style={{
+                        position: 'absolute',
+                        top: '14px',
+                        left: '14px',
+                        background: 'rgba(0,0,0,.45)',
+                        backdropFilter: 'blur(8px)',
+                        borderRadius: '16px',
+                        padding: '5px 12px',
+                        fontSize: '10px',
+                        fontWeight: 800,
+                        letterSpacing: '0.1em',
+                        textTransform: 'uppercase',
+                        color: 'rgba(255,255,255,.88)',
+                      }}
+                    >
+                      {loc.badgeLabel}
+                    </div>
+                  )}
+                  {/* Location name overlay */}
                   <div
                     style={{
                       position: 'absolute',
-                      top: '16px',
+                      bottom: '14px',
                       left: '16px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '6px',
-                      background: 'rgba(255,255,255,.12)',
-                      backdropFilter: 'blur(8px)',
-                      borderRadius: '16px',
-                      padding: '5px 12px',
-                      fontSize: '10px',
-                      fontWeight: 800,
-                      letterSpacing: '0.1em',
-                      textTransform: 'uppercase',
-                      color: 'rgba(255,255,255,.85)',
+                      right: '16px',
                     }}
                   >
-                    {loc.badgeLabel}
+                    <div
+                      style={{
+                        fontFamily: 'var(--font-fraunces), serif',
+                        fontSize: '24px',
+                        fontWeight: 700,
+                        color: '#fff',
+                        textShadow: '0 2px 8px rgba(0,0,0,.4)',
+                        lineHeight: 1.1,
+                      }}
+                    >
+                      {loc.name}
+                    </div>
+                    <div
+                      style={{
+                        fontSize: '12px',
+                        fontWeight: 600,
+                        color: 'rgba(255,255,255,.7)',
+                        marginTop: '3px',
+                      }}
+                    >
+                      {loc.addressLine1}{loc.addressLine2 ? ` · ${loc.addressLine2}` : ''}
+                    </div>
                   </div>
-                )}
-              </div>
+                </div>
+              </Link>
+
+              {/* Photo strip (if extra photos) */}
+              {photos.length > 0 && (
+                <div
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: `repeat(${Math.min(photos.length, 3)}, 1fr)`,
+                    gap: '2px',
+                    height: '72px',
+                  }}
+                >
+                  {photos.slice(0, 3).map((src, i) => (
+                    <div key={i} style={{ position: 'relative', overflow: 'hidden' }}>
+                      <Image
+                        src={src}
+                        alt=""
+                        fill
+                        style={{ objectFit: 'cover' }}
+                        sizes="(max-width: 768px) 33vw, 11vw"
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
 
               {/* Card body */}
-              <div style={{ padding: '24px' }}>
-                <div
-                  style={{
-                    fontFamily: 'var(--font-fraunces), serif',
-                    fontSize: '26px',
-                    fontWeight: 700,
-                    color: 'var(--night)',
-                    marginBottom: '6px',
-                  }}
-                >
-                  {loc.name}
-                </div>
-                <div
-                  style={{
-                    fontSize: '13px',
-                    fontWeight: 600,
-                    color: 'var(--text-soft)',
-                    marginBottom: '12px',
-                  }}
-                >
-                  {loc.addressLine1}
-                  {loc.addressLine2 ? ` · ${loc.addressLine2}` : ''}
-                </div>
+              <div style={{ padding: '20px 22px', flex: 1, display: 'flex', flexDirection: 'column' }}>
                 {loc.descriptionShort && (
                   <p
                     style={{
                       fontSize: '14px',
                       fontWeight: 400,
-                      lineHeight: 1.7,
+                      lineHeight: 1.65,
                       color: 'var(--text-mid)',
-                      marginBottom: '20px',
+                      marginBottom: '14px',
                     }}
                   >
                     {loc.descriptionShort}
@@ -268,9 +334,9 @@ export default function LocationsSection({ locations }: LocationsSectionProps) {
                   <div
                     style={{
                       display: 'flex',
-                      gap: '8px',
+                      gap: '6px',
                       flexWrap: 'wrap',
-                      marginBottom: '20px',
+                      marginBottom: '18px',
                     }}
                   >
                     {loc.features.map((feat) => (
@@ -279,9 +345,9 @@ export default function LocationsSection({ locations }: LocationsSectionProps) {
                         style={{
                           fontSize: '11px',
                           fontWeight: 700,
-                          padding: '4px 10px',
+                          padding: '3px 9px',
                           borderRadius: '12px',
-                          background: 'rgba(212,114,14,.1)',
+                          background: 'rgba(212,114,14,.09)',
                           color: 'var(--amber)',
                         }}
                       >
@@ -290,27 +356,110 @@ export default function LocationsSection({ locations }: LocationsSectionProps) {
                     ))}
                   </div>
                 )}
+
+                {/* Upcoming events for this location */}
                 <div
                   style={{
+                    borderTop: '1px solid rgba(30,20,10,.08)',
+                    paddingTop: '16px',
+                    marginTop: 'auto',
+                  }}
+                >
+                  <div
+                    style={{
+                      fontSize: '10px',
+                      fontWeight: 800,
+                      letterSpacing: '0.18em',
+                      textTransform: 'uppercase',
+                      color: 'var(--amber)',
+                      marginBottom: '10px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '6px',
+                    }}
+                  >
+                    <span style={{ display: 'block', width: '16px', height: '1.5px', background: 'var(--amber)' }} />
+                    Up Next
+                  </div>
+
+                  {locEvents.length > 0 ? (
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                      {locEvents.map((ev) => (
+                        <div
+                          key={ev.id}
+                          style={{
+                            display: 'flex',
+                            alignItems: 'flex-start',
+                            gap: '10px',
+                          }}
+                        >
+                          <span style={{ fontSize: '14px', lineHeight: 1, paddingTop: '1px' }}>
+                            {EVENT_ICONS[ev.type || 'general'] || '📅'}
+                          </span>
+                          <div>
+                            <div
+                              style={{
+                                fontSize: '13px',
+                                fontWeight: 700,
+                                color: 'var(--night)',
+                                lineHeight: 1.2,
+                              }}
+                            >
+                              {ev.title}
+                            </div>
+                            <div
+                              style={{
+                                fontSize: '11px',
+                                color: 'var(--text-soft)',
+                                marginTop: '2px',
+                              }}
+                            >
+                              {ev.date ? formatEventDate(ev.date) : ''}
+                              {ev.time && ev.time !== 'All Day' ? ` · ${ev.time}` : ''}
+                              {ev.freeAdmission ? ' · Free' : ''}
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <p
+                      style={{
+                        fontSize: '12px',
+                        fontStyle: 'italic',
+                        color: 'var(--text-soft)',
+                      }}
+                    >
+                      Check back soon — events added weekly.
+                    </p>
+                  )}
+                </div>
+
+                {/* CTA */}
+                <Link
+                  href={`/locations/${slug}`}
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '5px',
+                    marginTop: '16px',
                     fontSize: '13px',
                     fontWeight: 800,
                     color: 'var(--amber)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '6px',
+                    textDecoration: 'none',
                   }}
                 >
-                  See this location →
-                </div>
+                  See full schedule →
+                </Link>
               </div>
-            </Link>
+            </div>
           )
         })}
       </div>
 
       <p
         style={{
-          marginTop: '24px',
+          marginTop: '28px',
           fontSize: '14px',
           fontWeight: 400,
           fontStyle: 'italic',
@@ -325,7 +474,17 @@ export default function LocationsSection({ locations }: LocationsSectionProps) {
       </p>
 
       <style>{`
-        @media (max-width: 900px) {
+        .loc-card:hover {
+          transform: translateY(-6px);
+          box-shadow: 0 20px 48px rgba(30,20,10,.13) !important;
+        }
+        .loc-card:hover .loc-hero-img {
+          transform: scale(1.04);
+        }
+        @media (max-width: 1100px) {
+          .loc-cards-grid { grid-template-columns: 1fr 1fr !important; }
+        }
+        @media (max-width: 700px) {
           .loc-head-grid { grid-template-columns: 1fr !important; }
           .loc-cards-grid { grid-template-columns: 1fr !important; }
         }

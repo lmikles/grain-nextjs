@@ -6,8 +6,9 @@ export interface GrainEvent {
   date?: string
   time?: string
   location?: string
-  eventType?: string
-  shortDescription?: string
+  locationName?: string
+  type?: string
+  description?: string
   featured?: boolean
   recurring?: boolean
   freeAdmission?: boolean
