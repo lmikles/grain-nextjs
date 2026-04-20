@@ -62,7 +62,7 @@ export async function POST(request: NextRequest) {
       to: [toEmail],
       subject,
       html,
-      replyTo: fields.email as string | undefined,
+      reply_to: fields.email as string | undefined,
     })
 
     return NextResponse.json({ success: true })
