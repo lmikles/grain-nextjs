@@ -79,9 +79,12 @@ body {
 /* Beer Bible chart */
 .bb-chart {
   position: relative;
-  aspect-ratio: 1;
-  max-width: 420px;
+  width: 100%;
+  max-width: 460px;
+  aspect-ratio: 1 / 1;
   margin: 0 auto;
+  /* Fallback for browsers that ignore aspect-ratio on block elements */
+  min-height: 300px;
 }
 
 .bb-area {

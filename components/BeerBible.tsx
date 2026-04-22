@@ -85,7 +85,7 @@ const styles = [
     label: 'Porter & Stout',
     left: 18,
     top: 82,
-    color: '#2a1810',
+    color: '#5a3520',
     emoji: '☕',
     abv: '4.2–9%',
     tags: ['Roasty', 'Chocolate', 'Dark'],
@@ -109,8 +109,9 @@ export default function BeerBible() {
         style={{
           display: 'grid',
           gridTemplateColumns: '1fr 1fr',
-          gap: '80px',
+          gap: '64px',
           alignItems: 'center',
+          minWidth: 0, // prevent grid blowout
         }}
         className="bb-inner-grid"
       >
@@ -255,8 +256,18 @@ export default function BeerBible() {
           </div>
         </div>
 
-        {/* Right: flavor chart */}
-        <div className="bb-chart">
+        {/* Right: flavor chart — inline sizing guarantees square in any layout context */}
+        <div
+          className="bb-chart"
+          style={{
+            position: 'relative',
+            width: '100%',
+            maxWidth: '460px',
+            aspectRatio: '1 / 1',
+            margin: '0 auto',
+            alignSelf: 'center',
+          }}
+        >
           <div className="bb-area" />
           <div className="bb-axis-h" />
           <div className="bb-axis-v" />
