@@ -134,9 +134,28 @@ const locationImages: Record<string, string> = {
 }
 
 const galleryImages: Record<string, string[]> = {
-  newark: ['/images/location-newark.jpg', '/images/food-patio.jpg', '/images/community-event-1.jpg'],
-  h2o: ['/images/location-h2o.jpg', '/images/food-orange-crush.jpg'],
-  exchange: ['/images/location-exchange.jpg', '/images/location-exchange-hero.jpg'],
+  newark: [
+    '/images/locations/newark/exterior-day.jpg',
+    '/images/locations/newark/patio-night.jpg',
+    '/images/location-newark.jpg',
+    '/images/food-patio.jpg',
+  ],
+  h2o: [
+    '/images/locations/h2o/waterfront.jpg',
+    '/images/locations/h2o/stage.jpg',
+    '/images/location-h2o.jpg',
+  ],
+  exchange: [
+    '/images/locations/exchange/exterior.jpeg',
+    '/images/locations/exchange/lawn.jpeg',
+    '/images/location-exchange.jpg',
+  ],
+}
+
+const dogPhotos: Record<string, string> = {
+  newark: '/images/locations/newark/dog-patio.jpg',
+  h2o: '/images/locations/h2o/dog-patio.jpg',
+  exchange: '/images/locations/exchange/dog-patio.jpg',
 }
 
 // ─── Static params & metadata ───────────────────────────────────────────────
@@ -168,6 +187,7 @@ export default async function LocationPage({ params }: { params: { slug: string 
   const cfg = locationConfig[slug]
   const imgSrc = locationImages[slug]
   const gallery = galleryImages[slug] || []
+  const dogPhoto = dogPhotos[slug]
 
   // Fetch CMS override + live data in parallel
   const [location, weather, events] = await Promise.all([
@@ -421,12 +441,15 @@ export default async function LocationPage({ params }: { params: { slug: string 
             </p>
           </div>
 
-          {/* Placeholder for dog photo — drop /images/locations/[slug]/dog-patio.jpg */}
-          <div style={{ background: 'rgba(212,114,14,.08)', borderRadius: '12px', aspectRatio: '4/3', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', border: '2px dashed rgba(212,114,14,.2)' }} className="dog-photo-placeholder">
-            <span style={{ fontSize: '48px', marginBottom: '10px' }}>📸</span>
-            <p style={{ fontSize: '13px', color: 'var(--text-soft)', textAlign: 'center', lineHeight: 1.6, maxWidth: '200px' }}>
-              Drop <code>dog-patio.jpg</code> into<br /><code>/public/images/locations/{slug}/</code>
-            </p>
+          {/* Dog patio photo */}
+          <div style={{ borderRadius: '12px', overflow: 'hidden', position: 'relative', aspectRatio: '4/3' }} className="dog-photo-placeholder">
+            <Image
+              src={dogPhoto}
+              alt={`Dogs welcome at ${cfg.name}`}
+              fill
+              style={{ objectFit: 'cover' }}
+              sizes="(max-width: 900px) 100vw, 50vw"
+            />
           </div>
         </div>
         <style>{`@media (max-width: 900px) { .dog-grid { grid-template-columns: 1fr !important; } .dog-photo-placeholder { display: none !important; } }`}</style>
