@@ -48,7 +48,7 @@ const locationConfig: Record<string, {
       { days: 'Sunday', time: '10am – 1am' },
     ],
     accentColor: '#d4720e',
-    orderUrl: 'https://order.toasttab.com/online/grain-on-main',
+    orderUrl: 'https://www.toasttab.com/grain-on-main-270-e-main-st',
     giftCardUrl: 'https://www.toasttab.com/grain-craft-bar-kitchen/giftcards',
     merchUrl: 'https://grain-craft-bar.printful.me',
     weeklyEvents: [
@@ -79,7 +79,7 @@ const locationConfig: Record<string, {
       { days: 'Sunday', time: '11am – 9pm' },
     ],
     accentColor: '#2d5a3d',
-    orderUrl: 'https://order.toasttab.com/online/grain-h2o',
+    orderUrl: 'https://www.toasttab.com/grain-h2o-3006-summit-harbour-place',
     giftCardUrl: 'https://www.toasttab.com/grain-craft-bar-kitchen/giftcards',
     merchUrl: 'https://grain-craft-bar.printful.me',
     weeklyEvents: [
@@ -110,7 +110,7 @@ const locationConfig: Record<string, {
       { days: 'Sunday', time: '10am – 10pm' },
     ],
     accentColor: '#b03a18',
-    orderUrl: 'https://order.toasttab.com/online/grain-exchange',
+    orderUrl: 'https://order.toasttab.com/online/grain-new-executive-location-591-collaboration-way',
     giftCardUrl: 'https://www.toasttab.com/grain-craft-bar-kitchen/giftcards',
     merchUrl: 'https://grain-craft-bar.printful.me',
     weeklyEvents: [

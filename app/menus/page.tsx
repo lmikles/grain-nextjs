@@ -15,7 +15,7 @@ const locationMenus = [
     subtitle: '270 East Main Street · Newark',
     accent: '#d4720e',
     menuUrl: '#',
-    orderUrl: '#',
+    orderUrl: 'https://www.toasttab.com/grain-on-main-270-e-main-st',
   },
   {
     slug: 'h2o',
@@ -23,7 +23,7 @@ const locationMenus = [
     subtitle: 'C&D Canal · Castle Trail',
     accent: '#2d5a3d',
     menuUrl: '#',
-    orderUrl: '#',
+    orderUrl: 'https://www.toasttab.com/grain-h2o-3006-summit-harbour-place',
   },
   {
     slug: 'exchange',
@@ -31,7 +31,7 @@ const locationMenus = [
     subtitle: 'STAR Campus · Newark',
     accent: '#b03a18',
     menuUrl: '#',
-    orderUrl: '#',
+    orderUrl: 'https://order.toasttab.com/online/grain-new-executive-location-591-collaboration-way',
   },
 ]
 
