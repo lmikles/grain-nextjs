@@ -16,6 +16,7 @@ const locationConfig: Record<string, {
   addressLine1: string
   addressLine2: string
   phone: string
+  email: string
   googleMapsUrl: string
   descriptionShort: string
   descriptionLong: string
@@ -28,6 +29,11 @@ const locationConfig: Record<string, {
   weeklyEvents: { day: string; time: string; name: string; desc: string; icon: string }[]
   dogCopy: string
   parking: string
+  instagram: string
+  instagramUrl: string
+  facebook: string
+  facebookUrl: string
+  extraNote?: string
 }> = {
   newark: {
     name: 'Grain on Main',
@@ -36,7 +42,8 @@ const locationConfig: Record<string, {
     tagline: 'The original. Est. 2015.',
     addressLine1: '270 East Main Street',
     addressLine2: 'Newark, DE 19711',
-    phone: '(302) 555-0100',
+    phone: '(302) 444-8646',
+    email: 'info@grainonmain.com',
     googleMapsUrl: 'https://maps.google.com/?q=Grain+Craft+Bar+Kitchen+Newark+DE',
     descriptionShort: 'Our original location. Dog-friendly patio, weekly live music, and free off-street parking.',
     descriptionLong: `Grain on Main opened on East Main Street in 2015 with a simple idea: Newark deserved a craft bar that felt like it belonged to the neighborhood. Ten years later it still does. The fire pit patio runs all season, dogs are always welcome, and the live music never has a cover charge. We hire people who actually like people — and it shows every night of the week.`,
@@ -59,6 +66,10 @@ const locationConfig: Record<string, {
     ],
     dogCopy: 'Dogs have been regulars on our Main Street patio since day one. Fresh water is always out. Your dog is genuinely welcome — not just technically tolerated.',
     parking: 'Free off-street parking behind the building. Never stress about parking on a Saturday night.',
+    instagram: '@grainksq',
+    instagramUrl: 'https://www.instagram.com/grainksq/',
+    facebook: 'grainksq',
+    facebookUrl: 'https://www.facebook.com/grainksq',
   },
   h2o: {
     name: 'Grain H2O',
@@ -67,7 +78,8 @@ const locationConfig: Record<string, {
     tagline: "Delaware's waterfront craft bar.",
     addressLine1: 'C&D Canal · Castle Trail',
     addressLine2: 'New Castle County, DE',
-    phone: '(302) 555-0200',
+    phone: '(302) 440-4404',
+    email: 'H2O@GrainOnMain.com',
     googleMapsUrl: 'https://maps.google.com/?q=Grain+H2O+Delaware',
     descriptionShort: 'On the C&D Canal on the Castle Trail. An outdoor stage built for full bands and a marina patio that makes you forget tomorrow exists.',
     descriptionLong: `Grain H2O sits right on the C&D Canal along the Castle Trail — one of the most scenic spots in Delaware for a cold drink on a warm night. Our outdoor stage was built for full bands, not acoustic solos. The marina patio is dog-friendly. Sunday Funday brunch is a religion here. If you've only been to our Newark location, you haven't seen what we're capable of.`,
@@ -90,6 +102,11 @@ const locationConfig: Record<string, {
     ],
     dogCopy: 'The marina patio is fully dog-friendly. Water bowls are always out. A canal-side patio with your dog and a cold drink — it doesn\'t get more Delaware than this.',
     parking: 'Free parking at the trailhead. Easy walk to the patio along the Castle Trail.',
+    instagram: '@h2ograin',
+    instagramUrl: 'https://www.instagram.com/h2ograin/',
+    facebook: 'h2ograin',
+    facebookUrl: 'https://www.facebook.com/h2ograin/',
+    extraNote: 'Transient boat slips available at Dock G for dining guests.',
   },
   exchange: {
     name: 'Grain Exchange',
@@ -99,6 +116,7 @@ const locationConfig: Record<string, {
     addressLine1: '591 Collaboration Way',
     addressLine2: 'Newark, DE 19713 · STAR Campus',
     phone: '(302) 722-2307',
+    email: 'Exchange@GrainOnMain.com',
     googleMapsUrl: 'https://maps.google.com/?q=Grain+Exchange+STAR+Campus+Newark+DE',
     descriptionShort: "Newark's first outdoor patio in 30 years. Big city energy, a great lawn, and UD Athletics right across the street.",
     descriptionLong: `Grain Exchange brought something Newark hadn't seen in decades: a real outdoor patio experience. On STAR Campus, right across from UD Athletics, it's the spot for game day crowds and quiet Tuesday nights alike. The indoor/outdoor bar transitions seamlessly. Every Saturday kids eat free. And the weekly lineup — bingo, trivia, wings, music — gives regulars a reason to come back every single night of the week.`,
@@ -124,6 +142,11 @@ const locationConfig: Record<string, {
     ],
     dogCopy: 'The lawn and patio are dog territory. We\'ve got water, shade, and space. Bring the dog, grab a patio table, and settle in.',
     parking: 'Ample free parking on the STAR Campus. No stress, even on game days.',
+    instagram: '@grainxchg',
+    instagramUrl: 'https://www.instagram.com/grainxchg/',
+    facebook: 'grainstarcampus',
+    facebookUrl: 'https://www.facebook.com/grainstarcampus/',
+    extraNote: 'Coffee Shop open Mon–Fri 8am–2pm.',
   },
 }
 
@@ -457,6 +480,92 @@ export default async function LocationPage({ params }: { params: { slug: string 
           </div>
         </div>
         <style>{`@media (max-width: 900px) { .dog-grid { grid-template-columns: 1fr !important; } .dog-photo-placeholder { display: none !important; } }`}</style>
+      </section>
+
+      {/* ── Follow Us ────────────────────────────────────────────────── */}
+      <section style={{ background: 'var(--night)', padding: '56px 52px' }}>
+        <div
+          style={{
+            display: 'flex',
+            gap: '32px',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            flexWrap: 'wrap',
+          }}
+        >
+          <div>
+            <div style={{ fontSize: '11px', fontWeight: 800, letterSpacing: '0.2em', textTransform: 'uppercase', color: cfg.accentColor, marginBottom: '10px' }}>
+              Follow {cfg.name}
+            </div>
+            <p style={{ fontFamily: 'var(--font-fraunces), serif', fontSize: 'clamp(20px, 3vw, 30px)', fontWeight: 700, color: '#fff', margin: 0, lineHeight: 1.2 }}>
+              See what&apos;s on. Follow for live updates,
+              <br />
+              <em style={{ fontWeight: 300, fontStyle: 'italic', color: cfg.accentColor }}>
+                daily specials, and what&apos;s on tap.
+              </em>
+            </p>
+            {cfg.extraNote && (
+              <p style={{ fontSize: '13px', color: 'rgba(255,255,255,.4)', marginTop: '10px', fontStyle: 'italic' }}>
+                {cfg.extraNote}
+              </p>
+            )}
+          </div>
+          <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+            <a
+              href={cfg.instagramUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '10px',
+                padding: '14px 24px',
+                background: 'rgba(255,255,255,.06)',
+                border: '1px solid rgba(255,255,255,.12)',
+                borderRadius: '8px',
+                textDecoration: 'none',
+                color: '#fff',
+                fontFamily: 'var(--font-nunito), sans-serif',
+                fontSize: '14px',
+                fontWeight: 700,
+                transition: 'background .2s',
+              }}
+              className="social-btn"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+              </svg>
+              {cfg.instagram}
+            </a>
+            <a
+              href={cfg.facebookUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '10px',
+                padding: '14px 24px',
+                background: 'rgba(255,255,255,.06)',
+                border: '1px solid rgba(255,255,255,.12)',
+                borderRadius: '8px',
+                textDecoration: 'none',
+                color: '#fff',
+                fontFamily: 'var(--font-nunito), sans-serif',
+                fontSize: '14px',
+                fontWeight: 700,
+                transition: 'background .2s',
+              }}
+              className="social-btn"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+              </svg>
+              Facebook
+            </a>
+          </div>
+        </div>
+        <style>{`.social-btn:hover { background: rgba(255,255,255,.1) !important; }`}</style>
       </section>
 
       {/* ── Exchange-only: Rewards + Catering ───────────────────────── */}
