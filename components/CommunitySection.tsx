@@ -144,7 +144,7 @@ export default function CommunitySection() {
             That&apos;s not a marketing line. It&apos;s just what we do.
           </p>
           <Link
-            href="/our-story"
+            href="/programs"
             style={{
               display: 'inline-block',
               padding: '14px 32px',

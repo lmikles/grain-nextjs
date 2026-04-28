@@ -27,6 +27,7 @@ const locationConfig: Record<string, {
   giftCardUrl: string
   merchUrl: string
   weeklyEvents: { day: string; time: string; name: string; desc: string; icon: string }[]
+  hhDays: string
   dogCopy: string
   parking: string
   instagram: string
@@ -64,6 +65,7 @@ const locationConfig: Record<string, {
       { day: 'Saturday', time: '7pm', name: 'Live Music', desc: 'Local and regional acts. Free, no cover. Ever.', icon: '🎵' },
       { day: 'Sat & Sun', time: '10am–2pm', name: 'Weekend Brunch', desc: 'Full brunch menu + mimosas and Bloody Marys.', icon: '🍳' },
     ],
+    hhDays: 'Mon–Fri · 3–6pm',
     dogCopy: 'Dogs have been regulars on our Main Street patio since day one. Fresh water is always out. Your dog is genuinely welcome — not just technically tolerated.',
     parking: 'Free off-street parking behind the building. Never stress about parking on a Saturday night.',
     instagram: '@grainksq',
@@ -100,6 +102,7 @@ const locationConfig: Record<string, {
       { day: 'Saturday', time: '7pm', name: 'Live Music', desc: 'Full band nights under the open sky. No cover.', icon: '🎸' },
       { day: 'Sunday', time: '11am–2pm', name: 'Brunch + Music', desc: 'Sunday Funday on the canal. Full brunch menu.', icon: '🍳' },
     ],
+    hhDays: 'Wed–Fri · 3–6pm',
     dogCopy: 'The marina patio is fully dog-friendly. Water bowls are always out. A canal-side patio with your dog and a cold drink — it doesn\'t get more Delaware than this.',
     parking: 'Free parking at the trailhead. Easy walk to the patio along the Castle Trail.',
     instagram: '@h2ograin',
@@ -140,6 +143,7 @@ const locationConfig: Record<string, {
       { day: 'Saturday', time: '7pm', name: 'Live Music', desc: 'Local and regional acts. Free, no cover.', icon: '🎵' },
       { day: 'Sat & Sun', time: '10am–2pm', name: 'Weekend Brunch', desc: 'Full brunch menu + bottomless mimosas.', icon: '🍳' },
     ],
+    hhDays: 'Mon–Fri · 3–6pm',
     dogCopy: 'The lawn and patio are dog territory. We\'ve got water, shade, and space. Bring the dog, grab a patio table, and settle in.',
     parking: 'Ample free parking on the STAR Campus. No stress, even on game days.',
     instagram: '@grainxchg',
@@ -346,6 +350,99 @@ export default async function LocationPage({ params }: { params: { slug: string 
         </div>
       </section>
 
+      {/* ── Happy Hour ───────────────────────────────────────────────── */}
+      <section style={{ background: 'var(--warm)', padding: '72px 52px' }}>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'auto 1fr',
+            gap: '48px',
+            alignItems: 'start',
+          }}
+          className="hh-grid"
+        >
+          {/* Left: badge */}
+          <div
+            style={{
+              background: 'var(--night)',
+              borderRadius: '14px',
+              padding: '32px 28px',
+              textAlign: 'center',
+              minWidth: '180px',
+            }}
+          >
+            <div style={{ fontFamily: 'var(--font-fraunces), serif', fontSize: '13px', fontWeight: 700, fontStyle: 'italic', color: 'var(--amber)', marginBottom: '4px', letterSpacing: '0.04em' }}>Grain</div>
+            <div style={{ fontFamily: 'var(--font-fraunces), serif', fontSize: '42px', fontWeight: 900, color: '#fff', lineHeight: 0.9, letterSpacing: '-0.02em' }}>HAPPY<br />HOUR</div>
+            <div style={{ marginTop: '14px', background: cfg.accentColor, borderRadius: '6px', padding: '8px 14px' }}>
+              <div style={{ fontSize: '13px', fontWeight: 800, color: '#fff', letterSpacing: '0.05em' }}>{cfg.hhDays}</div>
+            </div>
+          </div>
+
+          {/* Right: menu */}
+          <div>
+            {/* Combo */}
+            <div style={{ marginBottom: '24px' }}>
+              <div style={{ fontSize: '11px', fontWeight: 800, letterSpacing: '0.18em', textTransform: 'uppercase', color: cfg.accentColor, marginBottom: '10px' }}>Combo</div>
+              <div style={{ background: 'var(--cream)', borderRadius: '8px', padding: '14px 18px', display: 'inline-flex', gap: '8px', alignItems: 'center' }}>
+                <span style={{ fontFamily: 'var(--font-fraunces), serif', fontSize: '17px', fontWeight: 700, color: 'var(--night)' }}>$10 Single Smashburger + Miller Lite Draft</span>
+              </div>
+            </div>
+
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }} className="hh-cols">
+              {/* Drinks */}
+              <div>
+                <div style={{ fontSize: '11px', fontWeight: 800, letterSpacing: '0.18em', textTransform: 'uppercase', color: cfg.accentColor, marginBottom: '10px' }}>Drinks</div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                  {[
+                    { price: '$4', item: 'House Cocktails' },
+                    { price: '$4', item: 'Domestics' },
+                    { price: '$5', item: 'Craft Drafts' },
+                    { price: '$6', item: 'Wines' },
+                    { price: '$6', item: 'Crushes' },
+                    { price: '$5', item: 'Soulstice on Tap', note: 'Vodka, triple sec, pomegranate, lemonade, Sprite' },
+                    { price: '$7', item: 'Diamond State', note: 'Miller High Life + Shot of Shanky\'s' },
+                  ].map((d) => (
+                    <div key={d.item} style={{ display: 'flex', gap: '10px', alignItems: 'baseline' }}>
+                      <span style={{ fontFamily: 'var(--font-fraunces), serif', fontSize: '18px', fontWeight: 900, color: 'var(--amber)', minWidth: '32px' }}>{d.price}</span>
+                      <div>
+                        <span style={{ fontSize: '14px', fontWeight: 700, color: 'var(--night)' }}>{d.item}</span>
+                        {d.note && <div style={{ fontSize: '11px', color: 'var(--text-soft)', fontStyle: 'italic', lineHeight: 1.3 }}>{d.note}</div>}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Bites */}
+              <div>
+                <div style={{ fontSize: '11px', fontWeight: 800, letterSpacing: '0.18em', textTransform: 'uppercase', color: cfg.accentColor, marginBottom: '10px' }}>Bites</div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                  {[
+                    { price: '$7', item: 'Loaded Tots' },
+                    { price: '$7', item: 'Loaded Fried Pickles' },
+                    { price: '$7', item: 'Personal Nachos' },
+                  ].map((b) => (
+                    <div key={b.item} style={{ display: 'flex', gap: '10px', alignItems: 'baseline' }}>
+                      <span style={{ fontFamily: 'var(--font-fraunces), serif', fontSize: '18px', fontWeight: 900, color: 'var(--amber)', minWidth: '32px' }}>{b.price}</span>
+                      <span style={{ fontSize: '14px', fontWeight: 700, color: 'var(--night)' }}>{b.item}</span>
+                    </div>
+                  ))}
+                </div>
+                <p style={{ fontSize: '12px', color: 'var(--text-soft)', fontStyle: 'italic', marginTop: '20px', lineHeight: 1.5 }}>
+                  No sales tax. No card fees.<br />Just the price you see.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <style>{`
+          @media (max-width: 700px) {
+            .hh-grid { grid-template-columns: 1fr !important; }
+            .hh-cols { grid-template-columns: 1fr !important; }
+          }
+        `}</style>
+      </section>
+
       {/* ── Weekly Lineup ────────────────────────────────────────────── */}
       <section style={{ background: '#0f0a04', padding: '80px 52px' }}>
         <div style={{ marginBottom: '44px' }}>
@@ -473,7 +570,7 @@ export default async function LocationPage({ params }: { params: { slug: string 
               style={{
                 objectFit: 'cover',
                 // Portrait photos: shift down to bring dog into frame
-                objectPosition: slug === 'newark' ? 'center 75%' : 'center center',
+                objectPosition: slug === 'newark' ? 'center 20%' : 'center center',
               }}
               sizes="(max-width: 900px) 100vw, 50vw"
             />

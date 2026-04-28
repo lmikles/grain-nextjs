@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import Image from 'next/image'
 import EmailSignup from '@/components/EmailSignup'
 
 export const metadata: Metadata = {
@@ -237,73 +238,55 @@ export default function OurStoryPage() {
           }}
           className="evans-grid"
         >
-          {/* Left: name + dates */}
-          <div>
-            <div
-              style={{
-                fontSize: '12px',
-                fontWeight: 800,
-                letterSpacing: '0.2em',
-                textTransform: 'uppercase',
-                color: 'var(--amber)',
-                marginBottom: '16px',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '10px',
-              }}
-            >
-              <span style={{ display: 'block', width: '24px', height: '2px', background: 'var(--amber)' }} />
-              Why &ldquo;Grain&rdquo;
+          {/* Left: logo + name */}
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '28px' }}>
+            {/* The Grain logo — Oruktor at top, Oliver Evans at bottom */}
+            <div style={{ position: 'relative', width: '280px', height: '280px', flexShrink: 0 }}>
+              <Image
+                src="/images/grain-logo.png"
+                alt="Grain Craft Bar + Kitchen — featuring Oliver Evans and the Oruktor Amphibolos"
+                fill
+                style={{ objectFit: 'contain' }}
+                sizes="280px"
+              />
             </div>
-            <h2
-              style={{
-                fontFamily: 'var(--font-fraunces), serif',
-                fontSize: 'clamp(36px, 5vw, 64px)',
-                fontWeight: 900,
-                lineHeight: 1,
-                color: '#fff',
-                marginBottom: '8px',
-              }}
-            >
-              Oliver Evans
-            </h2>
-            <p
-              style={{
-                fontFamily: 'var(--font-fraunces), serif',
-                fontSize: '20px',
-                fontWeight: 300,
-                fontStyle: 'italic',
-                color: 'var(--amber)',
-                marginBottom: '32px',
-              }}
-            >
-              Newport, Delaware · 1755–1819
-            </p>
 
-            {/* Key facts */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-              {[
-                { icon: '📜', fact: 'Held U.S. Patent #3' },
-                { icon: '⚙️', fact: 'Recognized by George Washington & Thomas Jefferson' },
-                { icon: '🚗', fact: 'Built America\'s first automobile — the Oruktor Amphibolos' },
-                { icon: '🏭', fact: 'Created the first integrated production line — a century before Henry Ford' },
-              ].map((item) => (
-                <div
-                  key={item.fact}
-                  style={{
-                    display: 'flex',
-                    gap: '14px',
-                    alignItems: 'flex-start',
-                    padding: '12px 16px',
-                    background: 'rgba(255,255,255,.04)',
-                    borderRadius: '8px',
-                    borderLeft: '2px solid rgba(212,114,14,.4)',
-                  }}
-                >
-                  <span style={{ fontSize: '18px', flexShrink: 0, marginTop: '1px' }}>{item.icon}</span>
-                  <span style={{ fontSize: '14px', fontWeight: 600, color: 'rgba(255,255,255,.75)', lineHeight: 1.5 }}>{item.fact}</span>
-                </div>
-              ))}
+            <div style={{ textAlign: 'center' }}>
+              <div
+                style={{
+                  fontSize: '12px',
+                  fontWeight: 800,
+                  letterSpacing: '0.2em',
+                  textTransform: 'uppercase',
+                  color: 'var(--amber)',
+                  marginBottom: '10px',
+                }}
+              >
+                Why &ldquo;Grain&rdquo;
+              </div>
+              <h2
+                style={{
+                  fontFamily: 'var(--font-fraunces), serif',
+                  fontSize: 'clamp(30px, 4vw, 52px)',
+                  fontWeight: 900,
+                  lineHeight: 1,
+                  color: '#fff',
+                  marginBottom: '6px',
+                }}
+              >
+                Oliver Evans
+              </h2>
+              <p
+                style={{
+                  fontFamily: 'var(--font-fraunces), serif',
+                  fontSize: '17px',
+                  fontWeight: 300,
+                  fontStyle: 'italic',
+                  color: 'var(--amber)',
+                }}
+              >
+                Newport, Delaware · 1755–1819
+              </p>
             </div>
           </div>
 

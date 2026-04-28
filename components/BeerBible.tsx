@@ -174,15 +174,17 @@ export default function BeerBible() {
             Your bartender will do the rest. Tasters are always free to ask for.
           </p>
 
-          {/* Active beer detail card */}
+          {/* Active beer detail card — fixed height prevents layout jitter */}
           <div
             style={{
-              minHeight: '140px',
+              height: '210px',
               borderRadius: '12px',
               padding: '24px',
               background: activeBeer ? '#fff' : 'rgba(30,20,10,.04)',
               border: activeBeer ? '1.5px solid rgba(212,114,14,.2)' : '1.5px dashed rgba(30,20,10,.12)',
               transition: 'background .3s, border-color .3s',
+              overflow: 'hidden',
+              position: 'relative',
             }}
           >
             {activeBeer ? (
