@@ -82,10 +82,10 @@ const fallbackLocations: Location[] = [
     slug: { current: 'h2o' },
     tagline: "Delaware's waterfront bar.",
     addressLine1: 'C+D Canal on the Castle Trail',
-    addressLine2: 'Wilmington, DE',
+    addressLine2: 'Summit North Marina on the C+D Canal',
     descriptionShort: "On the C&D Canal. An outdoor stage built for full bands and a marina patio that makes you forget tomorrow exists.",
     features: ['Marina View', 'Live Music Fri–Sun', 'Outdoor Stage', 'Sunday Funday'],
-    badgeLabel: 'Waterfront · Wilmington',
+    badgeLabel: 'Waterfront · Castle Trail',
     accentColor: '#2d5a3d',
   },
   {

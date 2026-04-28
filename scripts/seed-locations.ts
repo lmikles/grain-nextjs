@@ -40,14 +40,14 @@ const locations = [
     shortName: 'H2O',
     tagline: "Delaware's waterfront bar.",
     addressLine1: 'C+D Canal on the Castle Trail',
-    addressLine2: 'Wilmington, DE',
+    addressLine2: 'Summit North Marina on the C+D Canal',
     heroHeadline: 'Drinks on the Water',
     heroSubhead:
       'Stunning waterfront views, an outdoor stage built for full bands and a marina patio.',
     descriptionShort:
       'Our neighborhood spot on the water. Stunning waterfront views, an outdoor stage built for full bands and a marina patio that makes you forget tomorrow exists.',
     features: ['Dogs Welcome', 'Live Music', 'Waterfront', 'Outdoor Stage'],
-    badgeLabel: 'Waterfront · Wilmington',
+    badgeLabel: 'Waterfront · Castle Trail',
     accentColor: '#2d5a3d',
   },
   {
