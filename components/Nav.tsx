@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 
 const locations = [
@@ -14,6 +14,15 @@ export default function Nav() {
   const [solid, setSolid] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const [locOpen, setLocOpen] = useState(false)
+  const locCloseTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  const openLoc = () => {
+    if (locCloseTimer.current) clearTimeout(locCloseTimer.current)
+    setLocOpen(true)
+  }
+  const closeLoc = () => {
+    locCloseTimer.current = setTimeout(() => setLocOpen(false), 180)
+  }
 
   useEffect(() => {
     const handleScroll = () => setSolid(window.scrollY > 50)
@@ -97,8 +106,8 @@ export default function Nav() {
               alignItems: 'center',
               gap: '4px',
             }}
-            onMouseEnter={() => setLocOpen(true)}
-            onMouseLeave={() => setLocOpen(false)}
+            onMouseEnter={openLoc}
+            onMouseLeave={closeLoc}
             onClick={() => setLocOpen(!locOpen)}
           >
             Locations
@@ -122,8 +131,8 @@ export default function Nav() {
                 border: '1px solid rgba(255,255,255,.08)',
                 zIndex: 400,
               }}
-              onMouseEnter={() => setLocOpen(true)}
-              onMouseLeave={() => setLocOpen(false)}
+              onMouseEnter={openLoc}
+              onMouseLeave={closeLoc}
             >
               {locations.map((loc, i) => (
                 <Link
