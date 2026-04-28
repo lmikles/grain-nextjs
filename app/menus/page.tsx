@@ -20,7 +20,7 @@ const locationMenus = [
   {
     slug: 'h2o',
     name: 'Grain H2O',
-    subtitle: 'C+D Canal · Bear, DE',
+    subtitle: 'C&D Canal · Castle Trail',
     accent: '#2d5a3d',
     menuUrl: '#',
     orderUrl: '#',
@@ -92,7 +92,7 @@ export default function MenusPage() {
               marginBottom: '12px',
             }}
           >
-            Made from scratch. Ordered by regulars.
+            Fresh, high-quality food. Ordered by regulars.
           </p>
           <p
             style={{
@@ -126,6 +126,7 @@ export default function MenusPage() {
           {locationMenus.map((loc) => (
             <div
               key={loc.slug}
+              id={loc.slug}
               style={{
                 background: 'var(--cream)',
                 borderRadius: '12px',

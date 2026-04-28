@@ -250,10 +250,10 @@ export default async function LocationPage({ params }: { params: { slug: string 
               📍 Directions
             </a>
             <Link
-              href="/menus"
+              href={`/menus#${slug}`}
               style={{ padding: '13px 24px', border: '2px solid rgba(255,255,255,.35)', color: '#fff', fontFamily: 'var(--font-nunito), sans-serif', fontSize: '13px', fontWeight: 700, textDecoration: 'none', borderRadius: '4px' }}
             >
-              🍽 Menu
+              🍽 Our Menu
             </Link>
           </div>
         </div>
@@ -447,7 +447,11 @@ export default async function LocationPage({ params }: { params: { slug: string 
               src={dogPhoto}
               alt={`Dogs welcome at ${cfg.name}`}
               fill
-              style={{ objectFit: 'cover' }}
+              style={{
+                objectFit: 'cover',
+                // Portrait photos: shift down to bring dog into frame
+                objectPosition: slug === 'newark' ? 'center 75%' : 'center center',
+              }}
               sizes="(max-width: 900px) 100vw, 50vw"
             />
           </div>

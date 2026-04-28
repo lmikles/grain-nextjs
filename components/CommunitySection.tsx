@@ -56,7 +56,7 @@ export default function CommunitySection() {
                 marginBottom: '12px',
               }}
             >
-              $100K+
+              $350K+
             </div>
             <div
               style={{

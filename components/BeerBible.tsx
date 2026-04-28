@@ -143,12 +143,24 @@ export default function BeerBible() {
               marginBottom: '18px',
             }}
           >
-            Find a style you like.
+            Know what you like.
             <br />
             <em style={{ fontStyle: 'italic', color: 'var(--amber)', fontWeight: 300 }}>
-              We&apos;ll pour you something perfect.
+              Discover what&apos;s next to it.
             </em>
           </h2>
+          <p
+            style={{
+              fontSize: '16px',
+              fontWeight: 400,
+              lineHeight: 1.8,
+              color: 'var(--text-mid)',
+              marginBottom: '14px',
+            }}
+          >
+            Every location keeps its own Beer Bible — a rotating tap list that&apos;s always
+            changing. Stop in and see what&apos;s on.
+          </p>
           <p
             style={{
               fontSize: '16px',
@@ -158,9 +170,8 @@ export default function BeerBible() {
               marginBottom: '32px',
             }}
           >
-            Hover a dot to explore beer styles by flavor. Our tap list rotates constantly —
-            tell your bartender what sounds good and they&apos;ll find you something cold
-            and exactly right. Tasters are always free to ask for.
+            Find a style you know you love on the chart, then explore the beers around it.
+            Your bartender will do the rest. Tasters are always free to ask for.
           </p>
 
           {/* Active beer detail card */}

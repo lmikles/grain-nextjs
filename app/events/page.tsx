@@ -133,28 +133,39 @@ export default function EventsPage() {
           }}
           className="programs-grid"
         >
-          {programs.map((p) => (
-            <div
-              key={p.name}
-              className="program-card"
-            >
-              <div style={{ fontSize: '28px', marginBottom: '12px' }}>{p.icon}</div>
-              <h3
-                style={{
-                  fontFamily: 'var(--font-fraunces), serif',
-                  fontSize: '20px',
-                  fontWeight: 700,
-                  color: 'var(--night)',
-                  marginBottom: '10px',
-                }}
+          {programs.map((p) => {
+            const isPlay = p.name === 'Play at Grain'
+            const CardTag = isPlay ? 'a' : 'div'
+            return (
+              <CardTag
+                key={p.name}
+                href={isPlay ? '#play-at-grain' : undefined}
+                className="program-card"
+                style={isPlay ? { display: 'block', textDecoration: 'none', cursor: 'pointer' } : {}}
               >
-                {p.name}
-              </h3>
-              <p style={{ fontSize: '14px', lineHeight: 1.7, color: 'var(--text-mid)' }}>
-                {p.desc}
-              </p>
-            </div>
-          ))}
+                <div style={{ fontSize: '28px', marginBottom: '12px' }}>{p.icon}</div>
+                <h3
+                  style={{
+                    fontFamily: 'var(--font-fraunces), serif',
+                    fontSize: '20px',
+                    fontWeight: 700,
+                    color: 'var(--night)',
+                    marginBottom: '10px',
+                  }}
+                >
+                  {p.name}
+                </h3>
+                <p style={{ fontSize: '14px', lineHeight: 1.7, color: 'var(--text-mid)' }}>
+                  {p.desc}
+                </p>
+                {isPlay && (
+                  <div style={{ marginTop: '14px', fontSize: '13px', fontWeight: 800, color: 'var(--amber)' }}>
+                    Submit your act →
+                  </div>
+                )}
+              </CardTag>
+            )
+          })}
         </div>
 
         <style>{`
@@ -231,7 +242,7 @@ export default function EventsPage() {
       </section>
 
       {/* Play at Grain */}
-      <section style={{ background: 'var(--brown)', padding: '80px 52px' }}>
+      <section id="play-at-grain" style={{ background: 'var(--brown)', padding: '80px 52px' }}>
         <div
           style={{
             display: 'grid',

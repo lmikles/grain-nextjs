@@ -156,45 +156,36 @@ export default async function HomePage() {
             </p>
           </div>
 
-          {/* Right: stat cards */}
+          {/* Right: photo grid */}
           <div
             style={{
               display: 'grid',
               gridTemplateColumns: '1fr 1fr',
-              gap: '14px',
+              gridTemplateRows: '1fr 1fr',
+              gap: '10px',
+              height: '420px',
             }}
           >
             {[
-              { num: '10', label: 'Years in Delaware' },
-              { num: '3', label: 'Locations' },
-              { num: '$100K+', label: 'Raised for local causes' },
-              { num: '$0', label: 'Cover charge. Ever.' },
-            ].map((stat, i) => (
+              { src: '/images/happy-hour.jpg', label: 'Happy Hour' },
+              { src: '/images/food-crab-nachos.jpg', label: 'Crab Nachos' },
+              { src: '/images/brunch.jpg', label: 'Weekend Brunch' },
+              { src: '/images/community-event-1.jpg', label: 'Community' },
+            ].map((photo) => (
               <div
-                key={stat.label}
-                className={`stat-card stat-card-${i % 2 === 0 ? 'even' : 'odd'}`}
+                key={photo.src}
+                style={{ borderRadius: '10px', overflow: 'hidden', position: 'relative' }}
               >
-                <div
-                  style={{
-                    fontFamily: 'var(--font-fraunces), serif',
-                    fontSize: '46px',
-                    fontWeight: 900,
-                    fontStyle: 'italic',
-                    color: 'var(--amber)',
-                    lineHeight: 1,
-                    marginBottom: '6px',
-                  }}
-                >
-                  {stat.num}
-                </div>
-                <div
-                  style={{
-                    fontSize: '13px',
-                    fontWeight: 600,
-                    color: 'var(--text-soft)',
-                  }}
-                >
-                  {stat.label}
+                <Image
+                  src={photo.src}
+                  alt={photo.label}
+                  fill
+                  style={{ objectFit: 'cover', transition: 'transform .5s' }}
+                  sizes="(max-width: 900px) 50vw, 25vw"
+                  className="brand-photo"
+                />
+                <div style={{ position: 'absolute', bottom: '10px', left: '10px', fontSize: '10px', fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,.75)', background: 'rgba(0,0,0,.4)', backdropFilter: 'blur(6px)', padding: '3px 9px', borderRadius: '20px' }}>
+                  {photo.label}
                 </div>
               </div>
             ))}
@@ -205,20 +196,7 @@ export default async function HomePage() {
           @media (max-width: 900px) {
             .brand-inner-grid { grid-template-columns: 1fr !important; }
           }
-          .stat-card {
-            border-radius: 10px;
-            padding: 30px 24px;
-            border-bottom: 3px solid transparent;
-            transition: border-color .3s, transform .25s, box-shadow .25s;
-            cursor: default;
-          }
-          .stat-card-even { background: var(--cream); }
-          .stat-card-odd { background: #fff8ee; }
-          .stat-card:hover {
-            border-bottom-color: var(--amber);
-            transform: translateY(-4px);
-            box-shadow: 0 12px 36px rgba(212,114,14,.12);
-          }
+          .brand-photo:hover { transform: scale(1.05); }
         `}</style>
       </section>
 
@@ -280,7 +258,7 @@ export default async function HomePage() {
                 marginBottom: '22px',
               }}
             >
-              Made from scratch.
+              Quality you can taste.
               <br />
               <em style={{ fontStyle: 'italic', color: 'var(--orange)', fontWeight: 300 }}>
                 Ordered by regulars.
@@ -295,7 +273,7 @@ export default async function HomePage() {
                 marginBottom: '14px',
               }}
             >
-              Real food made from scratch. The kind you talk about afterward.
+              We&apos;re not claiming to be a scratch kitchen. We&apos;re claiming something better: a genuine commitment to quality in every dish we put on the menu.
             </p>
             <p
               style={{
@@ -307,8 +285,7 @@ export default async function HomePage() {
               }}
             >
               <strong style={{ color: 'rgba(255,255,255,.88)', fontWeight: 700 }}>
-                Crab Nachos with their own fan club. Smash burgers pressed to order.
-                Brunch that earns the wait.
+                Our won chips for the Crab Nachos are fried fresh daily. Our smash burger meat is a custom blend from a New Jersey farm. Our sauces are made in-house.
               </strong>
             </p>
             <p
@@ -320,7 +297,7 @@ export default async function HomePage() {
                 marginBottom: '28px',
               }}
             >
-              No sales tax. No credit card fees. Just the price on the menu.
+              Creative, high-quality dishes — the kind you talk about on the way home.
             </p>
 
             {/* Menu items */}
