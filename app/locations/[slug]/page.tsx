@@ -98,7 +98,7 @@ const locationConfig: Record<string, {
     tagline: 'STAR Campus · Newark, DE',
     addressLine1: '591 Collaboration Way',
     addressLine2: 'Newark, DE 19713 · STAR Campus',
-    phone: '(302) 555-0300',
+    phone: '(302) 722-2307',
     googleMapsUrl: 'https://maps.google.com/?q=Grain+Exchange+STAR+Campus+Newark+DE',
     descriptionShort: "Newark's first outdoor patio in 30 years. Big city energy, a great lawn, and UD Athletics right across the street.",
     descriptionLong: `Grain Exchange brought something Newark hadn't seen in decades: a real outdoor patio experience. On STAR Campus, right across from UD Athletics, it's the spot for game day crowds and quiet Tuesday nights alike. The indoor/outdoor bar transitions seamlessly. Every Saturday kids eat free. And the weekly lineup — bingo, trivia, wings, music — gives regulars a reason to come back every single night of the week.`,
@@ -458,6 +458,69 @@ export default async function LocationPage({ params }: { params: { slug: string 
         </div>
         <style>{`@media (max-width: 900px) { .dog-grid { grid-template-columns: 1fr !important; } .dog-photo-placeholder { display: none !important; } }`}</style>
       </section>
+
+      {/* ── Exchange-only: Rewards + Catering ───────────────────────── */}
+      {slug === 'exchange' && (
+        <section style={{ background: '#b03a18', padding: '72px 52px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '48px', alignItems: 'center' }} className="rewards-strip-grid">
+            {/* Rewards */}
+            <div>
+              <div style={{ fontSize: '11px', fontWeight: 800, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,.55)', marginBottom: '12px' }}>Exchange Rewards</div>
+              <h2 style={{ fontFamily: 'var(--font-fraunces), serif', fontSize: 'clamp(26px, 3.5vw, 40px)', fontWeight: 700, color: '#fff', lineHeight: 1.1, marginBottom: '16px' }}>
+                Earn points. Get $10 off.
+              </h2>
+              <p style={{ fontSize: '15px', color: 'rgba(255,255,255,.65)', lineHeight: 1.7, marginBottom: '8px' }}>
+                Join free and get <strong style={{ color: '#fff' }}>5 bonus points</strong> just for signing up.
+                Earn <strong style={{ color: '#fff' }}>1 point per $1</strong> spent.
+                Hit 100 points and we&apos;ll give you <strong style={{ color: '#fff' }}>$10 off</strong> your next visit.
+              </p>
+              <p style={{ fontSize: '13px', color: 'rgba(255,255,255,.4)', marginBottom: '24px', fontStyle: 'italic' }}>Exclusive to Grain Exchange.</p>
+              <a
+                href="https://www.toasttab.com/grain-new-executive-location-591-collaboration-way/loyalty"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ display: 'inline-block', padding: '13px 28px', background: '#fff', color: '#b03a18', fontFamily: 'var(--font-nunito), sans-serif', fontSize: '14px', fontWeight: 800, textDecoration: 'none', borderRadius: '4px', letterSpacing: '0.03em' }}
+              >
+                🏆 Join Rewards Free
+              </a>
+            </div>
+
+            {/* Catering */}
+            <div style={{ borderLeft: '1px solid rgba(255,255,255,.15)', paddingLeft: '48px' }} className="catering-divider">
+              <div style={{ fontSize: '11px', fontWeight: 800, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,.55)', marginBottom: '12px' }}>Lunch Exchange · Catering</div>
+              <h2 style={{ fontFamily: 'var(--font-fraunces), serif', fontSize: 'clamp(26px, 3.5vw, 40px)', fontWeight: 700, color: '#fff', lineHeight: 1.1, marginBottom: '16px' }}>
+                Feed your whole team.
+              </h2>
+              <p style={{ fontSize: '15px', color: 'rgba(255,255,255,.65)', lineHeight: 1.7, marginBottom: '24px' }}>
+                Party trays, lunch boxes, wings — delivered to STAR Campus or South Campus.
+                Order online through EZCater or call us to plan something bigger.
+              </p>
+              <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+                <a
+                  href="https://www.ezcater.com/catering/grain-exchange-3"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ padding: '12px 22px', background: '#fff', color: '#b03a18', fontFamily: 'var(--font-nunito), sans-serif', fontSize: '13px', fontWeight: 800, textDecoration: 'none', borderRadius: '4px' }}
+                >
+                  🧺 Order Catering
+                </a>
+                <Link
+                  href="/lunch-exchange"
+                  style={{ padding: '11px 20px', border: '2px solid rgba(255,255,255,.35)', color: '#fff', fontFamily: 'var(--font-nunito), sans-serif', fontSize: '13px', fontWeight: 700, textDecoration: 'none', borderRadius: '4px' }}
+                >
+                  Learn More
+                </Link>
+              </div>
+            </div>
+          </div>
+          <style>{`
+            @media (max-width: 900px) {
+              .rewards-strip-grid { grid-template-columns: 1fr !important; }
+              .catering-divider { border-left: none !important; padding-left: 0 !important; border-top: 1px solid rgba(255,255,255,.15); padding-top: 36px !important; }
+            }
+          `}</style>
+        </section>
+      )}
 
       {/* ── Email Signup ─────────────────────────────────────────────── */}
       <EmailSignup />

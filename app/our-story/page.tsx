@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 const stats = [
   { num: '2015', label: 'Year opened in Newark' },
   { num: '3', label: 'Locations across Delaware' },
-  { num: '$100K+', label: 'Raised for Delaware nonprofits' },
+  { num: '$350K+', label: 'Raised for Delaware nonprofits' },
   { num: '0', label: 'Cover charges. Ever.' },
 ]
 
