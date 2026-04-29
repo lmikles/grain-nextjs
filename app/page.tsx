@@ -529,7 +529,37 @@ export default async function HomePage() {
       {/* 9. Community */}
       <CommunitySection />
 
-      {/* 10. Email Signup */}
+      {/* 10. Careers strip */}
+      <section style={{ background: 'var(--night)', padding: '0' }}>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            padding: '36px 52px',
+            borderTop: '1px solid rgba(255,255,255,.06)',
+            flexWrap: 'wrap',
+            gap: '20px',
+          }}
+        >
+          <div>
+            <span style={{ fontSize: '11px', fontWeight: 800, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--amber)', display: 'block', marginBottom: '6px' }}>
+              We&apos;re always hiring
+            </span>
+            <p style={{ fontFamily: 'var(--font-fraunces), serif', fontSize: 'clamp(18px, 2.5vw, 26px)', fontWeight: 700, color: '#fff', margin: 0, lineHeight: 1.2 }}>
+              Join a team that actually likes what they do.
+            </p>
+          </div>
+          <Link
+            href="/careers"
+            style={{ padding: '13px 28px', background: 'var(--amber)', color: '#fff', fontFamily: 'var(--font-nunito), sans-serif', fontSize: '14px', fontWeight: 800, textDecoration: 'none', borderRadius: '4px', letterSpacing: '0.03em', whiteSpace: 'nowrap' }}
+          >
+            See Open Positions →
+          </Link>
+        </div>
+      </section>
+
+      {/* 11. Email Signup */}
       <EmailSignup />
     </>
   )

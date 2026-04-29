@@ -59,7 +59,7 @@ export default function Footer() {
           title="Visit"
           links={[
             { label: 'Newark — Main St', href: '/locations/newark' },
-            { label: 'Grain H2O — Bear', href: '/locations/h2o' },
+            { label: 'Grain H2O — Castle Trail', href: '/locations/h2o' },
             { label: 'Grain Exchange', href: '/locations/exchange' },
           ]}
         />
@@ -80,10 +80,10 @@ export default function Footer() {
           title="Connect"
           links={[
             { label: 'Private Events', href: '/events' },
-            { label: 'Fundraisers', href: '/events#fundraiser' },
+            { label: 'Community Programs', href: '/programs' },
             { label: 'Lunch Exchange', href: '/lunch-exchange' },
             { label: 'Careers', href: '/careers' },
-            { label: 'Gift Cards', href: 'https://grain.bigcartel.com', external: true },
+            { label: 'Gift Cards', href: 'https://www.toasttab.com/grain-craft-bar-kitchen/giftcards', external: true },
           ]}
         />
       </div>
